@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Daisy Pasobillo Portfolio Site</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="../CSS/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+      integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay"
+      crossorigin="anonymous"
+    />
+    <script type="text/javascript">
+      // <![CDATA[
+      var colour="white"; // in addition to "random" can be set to any valid colour eg "#f0f" or "red"
+      var sparkles=50;
+      
+      /****************************
+      *  Tinkerbell Magic Sparkle *
+      *(c)2005-13 mf2fm web-design*
+      *  http://www.mf2fm.com/rv  *
+      * DON'T EDIT BELOW THIS BOX *
+      ****************************/
+      var x=ox=400;
+      var y=oy=300;
+      var swide=800;
+      var shigh=600;
+      var sleft=sdown=0;
+      var tiny=new Array();
+      var star=new Array();
+      var starv=new Array();
+      var starx=new Array();
+      var stary=new Array();
+      var tinyx=new Array();
+      var tinyy=new Array();
+      var tinyv=new Array();
+      
+      window.onload=function() { if (document.getElementById) {
+        var i, rats, rlef, rdow;
+        for (var i=0; i<sparkles; i++) {
+          var rats=createDiv(3, 3);
+          rats.style.visibility="hidden";
+          rats.style.zIndex="999";
+          document.body.appendChild(tiny[i]=rats);
+          starv[i]=0;
+          tinyv[i]=0;
+          var rats=createDiv(5, 5);
+          rats.style.backgroundColor="transparent";
+          rats.style.visibility="hidden";
+          rats.style.zIndex="999";
+          var rlef=createDiv(1, 5);
+          var rdow=createDiv(5, 1);
+          rats.appendChild(rlef);
+          rats.appendChild(rdow);
+          rlef.style.top="2px";
+          rlef.style.left="0px";
+          rdow.style.top="0px";
+          rdow.style.left="2px";
+          document.body.appendChild(star[i]=rats);
+        }
+        set_width();
+        sparkle();
+      }}
+      
+      function sparkle() {
+        var c;
+        if (Math.abs(x-ox)>1 || Math.abs(y-oy)>1) {
+          ox=x;
+          oy=y;
+          for (c=0; c<sparkles; c++) if (!starv[c]) {
+            star[c].style.left=(starx[c]=x)+"px";
+            star[c].style.top=(stary[c]=y+1)+"px";
+            star[c].style.clip="rect(0px, 5px, 5px, 0px)";
+            star[c].childNodes[0].style.backgroundColor=star[c].childNodes[1].style.backgroundColor=(colour=="random")?newColour():colour;
+            star[c].style.visibility="visible";
+            starv[c]=50;
+            break;
+          }
+        }
+        for (c=0; c<sparkles; c++) {
+          if (starv[c]) update_star(c);
+          if (tinyv[c]) update_tiny(c);
+        }
+        setTimeout("sparkle()", 40);
+      }
+      
+      function update_star(i) {
+        if (--starv[i]==25) star[i].style.clip="rect(1px, 4px, 4px, 1px)";
+        if (starv[i]) {
+          stary[i]+=1+Math.random()*3;
+          starx[i]+=(i%5-2)/5;
+          if (stary[i]<shigh+sdown) {
+            star[i].style.top=stary[i]+"px";
+            star[i].style.left=starx[i]+"px";
+          }
+          else {
+            star[i].style.visibility="hidden";
+            starv[i]=0;
+            return;
+          }
+        }
+        else {
+          tinyv[i]=50;
+          tiny[i].style.top=(tinyy[i]=stary[i])+"px";
+          tiny[i].style.left=(tinyx[i]=starx[i])+"px";
+          tiny[i].style.width="2px";
+          tiny[i].style.height="2px";
+          tiny[i].style.backgroundColor=star[i].childNodes[0].style.backgroundColor;
+          star[i].style.visibility="hidden";
+          tiny[i].style.visibility="visible"
+        }
+      }
+      
+      function update_tiny(i) {
+        if (--tinyv[i]==25) {
+          tiny[i].style.width="1px";
+          tiny[i].style.height="1px";
+        }
+        if (tinyv[i]) {
+          tinyy[i]+=1+Math.random()*3;
+          tinyx[i]+=(i%5-2)/5;
+          if (tinyy[i]<shigh+sdown) {
+            tiny[i].style.top=tinyy[i]+"px";
+            tiny[i].style.left=tinyx[i]+"px";
+          }
+          else {
+            tiny[i].style.visibility="hidden";
+            tinyv[i]=0;
+            return;
+          }
+        }
+        else tiny[i].style.visibility="hidden";
+      }
+      
+      document.onmousemove=mouse;
+      function mouse(e) {
+        if (e) {
+          y=e.pageY;
+          x=e.pageX;
+        }
+        else {
+          set_scroll();
+          y=event.y+sdown;
+          x=event.x+sleft;
+        }
+      }
+      
+      window.onscroll=set_scroll;
+      function set_scroll() {
+        if (typeof(self.pageYOffset)=='number') {
+          sdown=self.pageYOffset;
+          sleft=self.pageXOffset;
+        }
+        else if (document.body && (document.body.scrollTop || document.body.scrollLeft)) {
+          sdown=document.body.scrollTop;
+          sleft=document.body.scrollLeft;
+        }
+        else if (document.documentElement && (document.documentElement.scrollTop || document.documentElement.scrollLeft)) {
+          sleft=document.documentElement.scrollLeft;
+          sdown=document.documentElement.scrollTop;
+        }
+        else {
+          sdown=0;
+          sleft=0;
+        }
+      }
+      
+      window.onresize=set_width;
+      function set_width() {
+        var sw_min=999999;
+        var sh_min=999999;
+        if (document.documentElement && document.documentElement.clientWidth) {
+          if (document.documentElement.clientWidth>0) sw_min=document.documentElement.clientWidth;
+          if (document.documentElement.clientHeight>0) sh_min=document.documentElement.clientHeight;
+        }
+        if (typeof(self.innerWidth)=='number' && self.innerWidth) {
+          if (self.innerWidth>0 && self.innerWidth<sw_min) sw_min=self.innerWidth;
+          if (self.innerHeight>0 && self.innerHeight<sh_min) sh_min=self.innerHeight;
+        }
+        if (document.body.clientWidth) {
+          if (document.body.clientWidth>0 && document.body.clientWidth<sw_min) sw_min=document.body.clientWidth;
+          if (document.body.clientHeight>0 && document.body.clientHeight<sh_min) sh_min=document.body.clientHeight;
+        }
+        if (sw_min==999999 || sh_min==999999) {
+          sw_min=800;
+          sh_min=600;
+        }
+        swide=sw_min;
+        shigh=sh_min;
+      }
+      
+      function createDiv(height, width) {
+        var div=document.createElement("div");
+        div.style.position="absolute";
+        div.style.height=height+"px";
+        div.style.width=width+"px";
+        div.style.overflow="hidden";
+        return (div);
+      }
+      
+      function newColour() {
+        var c=new Array();
+        c[0]=255;
+        c[1]=Math.floor(Math.random()*256);
+        c[2]=Math.floor(Math.random()*(256-c[1]/2));
+        c.sort(function(){return (0.5 - Math.random());});
+        return ("rgb("+c[0]+", "+c[1]+", "+c[2]+")");
+      }
+      // ]]>
+      </script>
+    <link
+      href="https://fonts.googleapis.com/css?family=Poppins:200i,300,400&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Raleway:700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!--****************************************************************************NAVBAR**********************************************-->
+
+   
+   
+    <ul class="nav justify-content-end" id="navbarNav">
+      <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="#welcome-section">About</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#experiences">Experiences</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#contact">Contact</a>
+      </li>
+    
+    </ul>
+  
+
+    
+           
+
+    
+
+    <!--************************************WELCOME SECTION*************************************************************************************-->
+
+    <section id="welcome-section" class="welcome-section">
+      <div class="sectionOne">
+        <h1>Hi! It's me, Daisy</h1>
+      <p class="fw-bolder text-center">an aspiring web developer</p>
+        <p class="fw-bolder text-center">a teacher</p>
+        <p class="fw-bolder text-center">a transcriber</p>
+        <p class="fw-bolder text-center">and a mom</p>
+        <p class="fw-bolder text-center">also a Potterhead 🧙‍♂️</p>
+      </div>
+    </section>
+
+
+    <!--************************************************************************************************* Experience SECTION -->
+
+    <section id="experiences" class="experiences-section">
+      <h2 class="experiences-section-header">These Are My Work Experiences</h2>
+
+      <div class="experiences-grid w-100">
+        <a
+          href="https://canossaacademycalamba.com.ph/about-us/"
+          target="_blank"
+          class="experiences experiences-tile"
+        >
+          <img
+            class="experiences-image"
+            src="data:image/jpeg;base64,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"
+            alt="CAC Logo"
+          />
+          <p class="experiences-title">
+            <span class="code">&lt;</span>
+            JHS and Elementary Teacher
+            <span class="code">&#47;&gt;</span>
+          </p>
+        </a>
+        <a
+          href="https://www.facebook.com/JASAGROSHOPINC/"
+          target="_blank"
+          class="experiences experiences-tile"
+        >
+          <img
+            class="experiences-image"
+            src="https://scontent.fmnl30-3.fna.fbcdn.net/v/t1.6435-9/67962283_2922642691295072_6346010524269936640_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=UT-j40-RyMUAX99fBE7&tn=NaOsmZgEM31bjNdP&_nc_ht=scontent.fmnl30-3.fna&oh=00_AT8gP4FSnuSpXIUrfZBTlcfoJw9S0P_Q0M-wslgtdt6QEw&oe=6352D289"
+            alt="JASIF Logo"
+          />
+          <p class="experiences-title">
+            <span class="code">&lt;</span>
+           Team Lead / Assistant Technician
+            <span class="code">&#47;&gt;</span>
+          </p>
+        </a>
+        <a
+          href="https://www.facebook.com/lasoledadacademe/"
+          target="_blank"
+          class="experiences experiences-tile"
+        >
+          <img
+            class="experiences-image"
+            src="https://scontent.fmnl30-2.fna.fbcdn.net/v/t39.30808-6/291882249_406238381524832_4861367802759655636_n.png?_nc_cat=109&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=21jRGNRF3GwAX-Lf5s8&tn=NaOsmZgEM31bjNdP&_nc_ht=scontent.fmnl30-2.fna&oh=00_AT-5sfUuzSg1gr4dY8r95A58DkDS_HW1s0vZFEpau2NEpw&oe=63317806"
+            alt="LSA Logo"
+          />
+          <p class="experiences-title">
+            <span class="code">&lt;</span>
+            Elementary Department Coordinator
+            <span class="code">&#47;&gt;</span>
+          </p>
+        </a>
+        <a
+          href="https://www.linkedin.com/company/stardmofficial/"
+          target="_blank"
+          class="experiences experiences-tile"
+        >
+          <img
+            class="experiences-image"
+            src="https://media-exp1.licdn.com/dms/image/C560BAQHxFxTVQfj2LQ/company-logo_200_200/0/1615820071466?e=1671667200&v=beta&t=Nt5U9msOyU2_pptK-Ly2uESJio5tsb5O75cUuLREElE"
+            alt="Stardm"
+          />
+          <p class="experiences-title">
+            <span class="code">&lt;</span>
+            Email Outreach Officer
+            <span class="code">&#47;&gt;</span>
+          </p>
+        </a>
+        <a
+          href="https://www.umritun.com/"
+          target="_blank"
+          class="experiences experiences-tile"
+        >
+          <img
+            class="experiences-image"
+            src="https://static.wixstatic.com/media/716e93_22277794d0064ef8ae4fd30cfe745a49~mv2.jpg/v1/crop/x_0,y_148,w_2000,h_1705/fill/w_222,h_186,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/Umritun%20Profile%20Design%202.jpg"
+            alt="Umritun Logo"
+          />
+          <p class="experiences-title">
+            <span class="code">&lt;</span>
+            Transcriber
+            <span class="code">&#47;&gt;</span>
+          </p>
+        </a>
+        <a
+          href="https://www.upwork.com/"
+          target="_blank"
+          class="experiences experiences-tile"
+        >
+          <img
+            class="experiences-image"
+            src="data:image/png;base64,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"
+            alt="experiences"
+          />
+          <p class="experiences-title">
+            <span class="code">&lt;</span>
+            Freelancer, General VA
+            <span class="code">&#47;&gt;</span>
+          </p>
+        </a>
+      </div>
+
+      
+    </section>
+
+    <!-- ****************************************END PROJECT******************************************************-->
+
+    <!--****************************************** START CONTACT**************************************************-->
+
+    <section id="contact" class="contact-section">
+      <div class="contact-section-header">
+        <h2>Let's work together...</h2>
+        <p>Are you in for the experience you won't regret?</p>
+      </div>
+      <div class="contact-links">
+        <a
+          href="https://www.facebook.com/pasobillo.daisy"
+          target="_blank"
+          class="btn contact-details"
+          ><i class="fab fa-facebook-square"></i> Facebook</a
+        >
+        <a
+          id="profile-link"
+          href="https://github.com/DaisyPas"
+          target="_blank"
+          class="btn contact-details"
+          ><i class="fab fa-github"></i> GitHub</a
+        >
+        
+        <a href="mailto:dhekjeck@gmail.com?subject=Portfolio%20Site%20Email" class="btn contact-details"><i class="fas fa-at"></i> Send a mail</a
+        >
+        <a href="tel:+639364474742" class="btn contact-details"
+          ><i class="fas fa-mobile-alt"></i> Call me</a
+        >
+      </div>
+    </section>
+
+    <!--*******************************************END CONTACT********************************************************-->
+
+    <!--*************************************************START FOOTER************************************************-->
+
+    <footer>
+            <p>
+        &copy; Created by
+        <a href="https://www.freecodecamp.com/" target="_blank"
+          >Daisy Pasobillo </a>
+      </p>
+    </footer>
+
+    <!-- -------------------------------------------------------------------------------------------------------END FOOTER SECTION -->
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+
+</body>
+</html>
