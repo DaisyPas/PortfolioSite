@@ -161,6 +161,9 @@
     background-color: #45567d81;
     padding: 5.0rem;
     border-radius: 4%;
+    width: 50%;
+    margin: 7rem auto 0;
+    
   }
 
   h1 {
@@ -169,8 +172,12 @@
   }
 
   @media only screen and (max-width: 600px){
-    .sectionOne {
+    /* .sectionOne {
 
+    } */
+
+    .navbar {
+      background-color: white !important;
     }
     .sectionOne h1 {
       font-size: 3rem;
