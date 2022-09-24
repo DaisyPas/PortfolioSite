@@ -128,7 +128,9 @@
     color:var(--main-white);
   }
   .nav-item a:hover {
-    background: var(--main-blue);
+    background-color: #45567d81;
+    border-radius: 2%;
+  
   }
 
   @media (max-width: 28.75em) {
@@ -142,10 +144,10 @@
       width: auto;
       margin: 0 1rem;  
     }
-    .color-black {
-      color:black !important;
-      background-color: var(--main-red);
-    }
+    .nav-item a {
+      text-shadow: none;}
+
+   
   }
 
   
@@ -192,6 +194,7 @@
     }
     .navbar .nav-link { 
       color: black !important;
+      text-shadow: none;
     }
 
 
