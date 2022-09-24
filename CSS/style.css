@@ -92,6 +92,7 @@
   /* ------------------------------------------------------------------nav--------------------------------------------- */
 .navbar {
   background-color: transparent !important;
+ 
 }
   /* .nav {
     width: auto;
@@ -110,17 +111,9 @@
     margin-right: 2rem;
   }
 
-  @media (max-width: 28.75em) {
-    .nav {
-      width: auto;
-      justify-content: center;
-    }
-
-    .nav-item {
-      width: auto;
-      margin: 0 1rem;
-      
-    }
+  .nav-link {
+    color: white !important;
+    padding: 2.5rem  !important;
   }
 
   .nav-item a {
@@ -137,6 +130,25 @@
   .nav-item a:hover {
     background: var(--main-blue);
   }
+
+  @media (max-width: 28.75em) {
+    .nav {
+      width: auto;
+      justify-content: center;
+      
+    }
+
+    .nav-item {
+      width: auto;
+      margin: 0 1rem;  
+    }
+    .color-black {
+      color:black !important;
+      background-color: var(--main-red);
+    }
+  }
+
+  
 
   
 
@@ -172,12 +184,21 @@
   }
 
   @media only screen and (max-width: 600px){
-    /* .sectionOne {
-
-    } */
+    
 
     .navbar {
       background-color: white !important;
+     
+    }
+    .navbar .nav-link { 
+      color: black !important;
+    }
+
+
+    .sectionOne {
+      width:70%;
+      margin: 20rem auto 0;
+
     }
     .sectionOne h1 {
       font-size: 3rem;
